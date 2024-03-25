@@ -26,10 +26,8 @@ const client = new TextServiceClient({
 
 // Endpoint to generate business names based on user input
 app.post("/generate-names", async (req, res) => {
-  console.log("Step 1");
   try {
     const { category, keywords, length } = req.body;
-    console.log("Step 2");
 
     console.log("Sending data to API:", {
       category: category,
@@ -40,7 +38,6 @@ app.post("/generate-names", async (req, res) => {
     // Construct prompt based on user input
     const prompt = `Generate unique, memorable and catchy business names related to ${category} with the help of keywords like ${keywords} with maximum character limit upto ${length} characters.`;
 
-    console.log("Step 3");
     // Call Google AI Platform Text-to-Text Generation API
     const response = await client.generateText({
       model: MODEL_NAME,
@@ -49,7 +46,7 @@ app.post("/generate-names", async (req, res) => {
       },
     });
 
-    console.log("API Response: 123", JSON.stringify(response, null, 2));
+    console.log("API Response: ", JSON.stringify(response, null, 2));
     let output = response[0].candidates[0].output;
     console.log(output);
 
