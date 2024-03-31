@@ -14,16 +14,19 @@ const port = process.env.PORT || 5000;
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
 
-
 // cors
-app.options('*', cors()); // Enable CORS pre-flight for all routes
+app.options("*", cors()); // Enable CORS pre-flight for all routes
 
 // const corsOptions = {
 //   origin: 'https://www.bizzowl.com',
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 //  };
- 
- app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://www.bizzowl.com",
+  })
+);
 
 const MODEL_NAME = "models/text-bison-001";
 const API_KEY = process.env.GOOGLE_API_KEY;
