@@ -9,7 +9,7 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
