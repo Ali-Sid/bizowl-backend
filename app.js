@@ -13,10 +13,6 @@ const port = process.env.PORT || 5000;
 
 // Middleware for parsing JSON bodies
 app.use(bodyParser.json());
-
-// cors
-app.options("*", cors()); // Enable CORS pre-flight for all routes
-
 // const corsOptions = {
 //   origin: 'https://www.bizzowl.com',
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -24,9 +20,16 @@ app.options("*", cors()); // Enable CORS pre-flight for all routes
 
 app.use(
   cors({
-    origin: "https://www.bizzowl.com",
+    origin: "*", // Adjust this to your needs, '*' allows all origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify the methods you want to allow
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify the headers you want to allow
+    optionsSuccessStatus: 200, // Some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
+
+// cors
+app.options("*", cors()); // Enable CORS pre-flight for all routes
+
 
 const MODEL_NAME = "models/text-bison-001";
 const API_KEY = process.env.GOOGLE_API_KEY;
